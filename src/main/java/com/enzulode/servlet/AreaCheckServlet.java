@@ -10,9 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This servlet is responsible for point hit area checks.
@@ -47,6 +50,8 @@ public class AreaCheckServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		HttpSession session = req.getSession();
+
 //		Check if all required params are present
 		if (req.getParameter("x") == null || req.getParameter("y") == null
 				|| req.getParameter("r") == null)
@@ -107,7 +112,15 @@ public class AreaCheckServlet extends HttpServlet
 		boolean checkResult = areaHitChecker.check(dto);
 
 //		Check succeed - forward on result jsp
-		req.setAttribute("result", new CheckResultDTO(x, y, r, (checkResult) ? "succeed" : "missed"));
+		CheckResultDTO checkResultDTO = new CheckResultDTO(x, y, r, (checkResult) ? "succeed" : "missed");
+		req.setAttribute("result", checkResultDTO);
+
+		List<CheckResultDTO> results = (session.getAttribute("results") == null)
+				? new ArrayList<>()
+				: (List<CheckResultDTO>) session.getAttribute("results");
+
+		results.add(checkResultDTO);
+		session.setAttribute("results", results);
 		getServletContext().getRequestDispatcher("/result.jsp").forward(req, resp);
 	}
 
