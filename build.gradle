@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'war'
 }
 
 group = 'com.enzulode'
@@ -12,4 +13,12 @@ java {
 
 repositories {
 	mavenCentral()
+}
+
+dependencies {
+	implementation 'jakarta.platform:jakarta.jakartaee-web-api:10.0.0'
+}
+
+war {
+	archiveName rootProject.name
 }
