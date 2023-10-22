@@ -11,7 +11,7 @@
 		<option value="5">5</option>
 	</select>
 
-	<input type="text" name="y" placeholder="y">
+	<input type="text" name="y" id="y-selection" placeholder="y">
 
 	<br>
 
@@ -40,5 +40,7 @@
 		<input type="radio" name="r" id="r-5" value="5">
 	</label>
 
-	<button type="submit">Check</button>
+	<button type="button" id="do-check">Check</button>
+
+	<p id="error-message"></p>
 </form>
