@@ -21,7 +21,7 @@
 				<td><%= result.getX() %></td>
 				<td><%= result.getY() %></td>
 				<td><%= result.getR() %></td>
-				<td><%= result.getResult() %></td>
+				<td><%= result.getResultString() %></td>
 			</tr>
 		<%      }
 			}
