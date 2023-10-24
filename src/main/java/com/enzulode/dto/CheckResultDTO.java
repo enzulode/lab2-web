@@ -11,8 +11,9 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class CheckResultDTO
 {
-	private final int x;
-	private final float y;
-	private final int r;
-	private final String result;
+	public final int x;
+	public final float y;
+	public final int r;
+	public final String resultString;
+	public final boolean result;
 }
