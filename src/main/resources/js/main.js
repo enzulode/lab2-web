@@ -1,4 +1,11 @@
 import {applyErrorMessage, clearErrors, parseAppropriateFloat, validateFormData} from "./utils/Utils.js";
+import {Canvas} from "./utils/Canvas.js";
+
+const canvas = new Canvas("area")
+
+$(window).on('load', () => {
+	canvas.drawEmptyArea()
+})
 
 $(document).ready(() => {
 	const form = $("form")
@@ -21,4 +28,22 @@ $(document).ready(() => {
 	}
 
 	$("#do-check").click((e) => validateInputs())
+	$("input[name='r']").click((e) => {
+		canvas.redrawArea($(e.target).val(), true)
+		canvas.applyPoints(calculatedPoints)
+	})
+
+	canvas.onClick(
+		(success) => {
+			clearErrors()
+
+			let loc = window.location
+			let calculateUrl = `${loc.protocol}//${loc.host}/${loc.pathname}check?x=${success.x}&y=${success.y}&r=${success.r}`
+			$(location).prop('href', calculateUrl)
+		},
+		(error) => {
+			applyErrorMessage(error)
+		}
+	)
+
 })
