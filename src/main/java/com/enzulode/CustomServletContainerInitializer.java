@@ -27,6 +27,10 @@ public class CustomServletContainerInitializer implements ServletContainerInitia
 	@Override
 	public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException
 	{
+//		Register main (index) page
+		ctx.addJspFile("indexJsp", "/WEB-INF/pages/index.jsp")
+						.addMapping("/", "/index.jsp");
+
 //		Register result page
 		ctx.addJspFile("resultJsp", "/WEB-INF/pages/result.jsp")
 				.addMapping("/result.jsp");

@@ -112,7 +112,7 @@ public class AreaCheckServlet extends HttpServlet
 		boolean checkResult = areaHitChecker.check(dto);
 
 //		Check succeed - forward on result jsp
-		CheckResultDTO checkResultDTO = new CheckResultDTO(x, y, r, (checkResult) ? "succeed" : "missed");
+		CheckResultDTO checkResultDTO = new CheckResultDTO(x, y, r, (checkResult) ? "succeed" : "missed", checkResult);
 		req.setAttribute("result", checkResultDTO);
 
 		List<CheckResultDTO> results = (session.getAttribute("results") == null)
