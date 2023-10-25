@@ -38,7 +38,7 @@ $(document).ready(() => {
 			clearErrors()
 
 			let loc = window.location
-			let calculateUrl = `${loc.protocol}//${loc.host}/${loc.pathname}check?x=${success.x}&y=${success.y}&r=${success.r}`
+			let calculateUrl = `${loc.protocol}//${loc.host}${loc.pathname}?x=${success.x}&y=${success.y}&r=${success.r}`
 			$(location).prop('href', calculateUrl)
 		},
 		(error) => {
