@@ -30,7 +30,7 @@ public class CustomServletContainerInitializer implements ServletContainerInitia
 	{
 //		Register main (index) page
 		ctx.addJspFile("indexJsp", "/WEB-INF/pages/index.jsp")
-						.addMapping("/", "/index.jsp");
+						.addMapping("/index.jsp");
 
 //		Register result page
 		ctx.addJspFile("resultJsp", "/WEB-INF/pages/result.jsp")
