@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<canvas id="area" width="600px" height="600px"></canvas>
+<div class="canvas-container">
+	<canvas id="area" width="300px" height="300px"></canvas>
+</div>
+
 <script>
 	let calculatedPoints = []
 
