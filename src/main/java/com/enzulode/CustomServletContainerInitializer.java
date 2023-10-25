@@ -4,6 +4,7 @@ import com.enzulode.check.AreaHitChecker;
 import com.enzulode.check.AreaHitCheckerImpl;
 import com.enzulode.dto.PointCoordinatesCheckDTO;
 import com.enzulode.servlet.AreaCheckServlet;
+import com.enzulode.servlet.ControllerServlet;
 import com.enzulode.validation.PointCoordinatesCheckDTOValidator;
 import com.enzulode.validation.Validator;
 import jakarta.servlet.ServletContainerInitializer;
@@ -49,5 +50,12 @@ public class CustomServletContainerInitializer implements ServletContainerInitia
 //		Register area check servlet
 		ctx.addServlet("areaCheckServlet", areaCheckServlet)
 				.addMapping("/check");
+
+//		Instantiate controller servlet
+		ControllerServlet controllerServlet = new ControllerServlet();
+
+//		Register controller servlet
+		ctx.addServlet("controllerServlet", controllerServlet)
+				.addMapping("/*");
 	}
 }
