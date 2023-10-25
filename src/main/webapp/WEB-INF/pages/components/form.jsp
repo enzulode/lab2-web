@@ -1,4 +1,4 @@
-<form action="${pageContext.request.contextPath}/check" method="GET">
+<form action="${pageContext.request.contextPath}" method="GET">
 	<select name="x" id="x-selection">
 		<option value="-3">-3</option>
 		<option value="-2">-2</option>
