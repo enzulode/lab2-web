@@ -29,15 +29,15 @@ public class CustomServletContainerInitializer implements ServletContainerInitia
 	public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException
 	{
 //		Register main (index) page
-		ctx.addJspFile("indexJsp", "/WEB-INF/pages/index.jsp")
+		ctx.addJspFile("indexJsp", "/pages/index.jsp")
 						.addMapping("/index.jsp");
 
 //		Register result page
-		ctx.addJspFile("resultJsp", "/WEB-INF/pages/result.jsp")
+		ctx.addJspFile("resultJsp", "/pages/result.jsp")
 				.addMapping("/result.jsp");
 
 //		Register error page
-		ctx.addJspFile("errorJsp", "/WEB-INF/pages/error.jsp")
+		ctx.addJspFile("errorJsp", "/pages/error.jsp")
 				.addMapping("/error.jsp");
 
 //		Instantiate area check servlet dependencies
