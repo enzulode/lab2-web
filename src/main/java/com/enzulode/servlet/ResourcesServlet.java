@@ -1,11 +1,14 @@
 package com.enzulode.servlet;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
+import static com.enzulode.util.WebUtils.forwardErrorPage;
 
 /**
  * This servlet is responsible for static resources access.
@@ -25,13 +28,12 @@ public class ResourcesServlet extends HttpServlet
 	 * @throws IOException if resource as stream fetch failed or writer access failed
 	 */
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		String[] res = req.getRequestURI().split("/resources");
 		if (res.length < 2)
 		{
-			resp.setStatus(404);
-			resp.getWriter().println("Resource not found");
+			forwardErrorPage(req, resp, 404, "Resource not found");
 			return;
 		}
 
