@@ -2,7 +2,6 @@ package com.enzulode.servlet;
 
 import com.enzulode.check.AreaHitChecker;
 import com.enzulode.dto.CheckResultDTO;
-import com.enzulode.dto.ErrorDTO;
 import com.enzulode.dto.PointCoordinatesCheckDTO;
 import com.enzulode.exception.ValidationException;
 import com.enzulode.validation.Validator;
@@ -16,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.enzulode.util.WebUtils.forwardErrorPage;
 
 /**
  * This servlet is responsible for point hit area checks.
@@ -56,7 +57,7 @@ public class AreaCheckServlet extends HttpServlet
 		if (req.getParameter("x") == null || req.getParameter("y") == null
 				|| req.getParameter("r") == null)
 		{
-			forwardToErrorPage(req, resp, 400, "Not all required params are present");
+			forwardErrorPage(req, resp, 400, "Not all required params are present");
 			return;
 		}
 
@@ -68,7 +69,7 @@ public class AreaCheckServlet extends HttpServlet
 		}
 		catch (NumberFormatException e)
 		{
-			forwardToErrorPage(req, resp, 400, "X parameter should be an integer value");
+			forwardErrorPage(req, resp, 400, "X parameter should be an integer value");
 			return;
 		}
 
@@ -79,7 +80,7 @@ public class AreaCheckServlet extends HttpServlet
 		}
 		catch (NumberFormatException e)
 		{
-			forwardToErrorPage(req, resp, 400, "Y parameter should be a float value");
+			forwardErrorPage(req, resp, 400, "Y parameter should be a float value");
 			return;
 		}
 
@@ -90,7 +91,7 @@ public class AreaCheckServlet extends HttpServlet
 		}
 		catch (NumberFormatException e)
 		{
-			forwardToErrorPage(req, resp, 400, "R parameter should be an integer value");
+			forwardErrorPage(req, resp, 400, "R parameter should be an integer value");
 			return;
 		}
 
@@ -104,7 +105,7 @@ public class AreaCheckServlet extends HttpServlet
 		}
 		catch (ValidationException e)
 		{
-			forwardToErrorPage(req, resp, 400, e.getMessage());
+			forwardErrorPage(req, resp, 400, e.getMessage());
 			return;
 		}
 
@@ -122,22 +123,5 @@ public class AreaCheckServlet extends HttpServlet
 		results.add(checkResultDTO);
 		session.setAttribute("results", results);
 		getServletContext().getRequestDispatcher("/result.jsp").forward(req, resp);
-	}
-
-	/**
-	 * This method forwards request to an error JSP.
-	 *
-	 * @param req http servlet request instance
-	 * @param resp http servlet response instance
-	 * @param status http status code
-	 * @param message error message
-	 * @throws ServletException if the request for the GET could not be handled
-	 * @throws IOException if an input or output error is detected when the servlet handles the GET request
-	 */
-	private void forwardToErrorPage(HttpServletRequest req, HttpServletResponse resp, int status, String message) throws ServletException, IOException
-	{
-		resp.setStatus(status);
-		req.setAttribute("error", new ErrorDTO(message));
-		req.getRequestDispatcher("/error.jsp").forward(req, resp);
 	}
 }

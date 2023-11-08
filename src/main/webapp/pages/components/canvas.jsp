@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.enzulode.dto.CheckResultDTO" %>
+<%@ page import="java.util.List" %>
 
 <div class="canvas-container">
 	<canvas id="area" width="300px" height="300px"></canvas>
@@ -15,7 +16,7 @@
 				for (CheckResultDTO result : (List<CheckResultDTO>) session.getAttribute("results"))
 				{
 		%>
-			pointsToBeLoaded.push({x: <%= result.x %>, y: <%= result.y %>, hit: <%= result.result %>})
+			pointsToBeLoaded.push({x: <%= result.x %>, y: <%= result.y %>, r: <%= result.r %>, hit: <%= result.result %>, resultString: '<%= result.resultString %>'})
 		<%
 				}
 			}
@@ -25,5 +26,4 @@
 	}
 
 	loadCalculatedPoints()
-	console.log(calculatedPoints)
 </script>

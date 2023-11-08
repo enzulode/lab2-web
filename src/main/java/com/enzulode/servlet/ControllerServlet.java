@@ -1,11 +1,13 @@
 package com.enzulode.servlet;
 
+import com.enzulode.dto.CheckResultDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This servlet is responsible for the whole application requests dispatching.
@@ -27,6 +29,10 @@ public class ControllerServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		var results = req.getSession().getAttribute("results");
+		if (results == null)
+			req.getSession().setAttribute("results", new ArrayList<CheckResultDTO>());
+
 		if (req.getParameter("x") == null || req.getParameter("y") == null
 				|| req.getParameter("r") == null)
 			getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
