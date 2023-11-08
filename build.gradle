@@ -25,5 +25,5 @@ dependencies {
 }
 
 war {
-	archiveName rootProject.name
+	archiveName rootProject.name + '.war'
 }
