@@ -3,10 +3,15 @@ function validateNumeric(string) {
 
     let nonNumericSymbols = new RegExp('[^0-9\.\-]');
     let minusNotvalid = new RegExp('[\-]$');
-    // let minusWithZero = new RegExp('\-0');
     let dotInBegining = new RegExp('^[\.].*');
     let dotInTheEnd = new RegExp('.*[\.]$');
 
+    let minusWithZero = new RegExp('^\-0+$');
+    let minusWithZeroFloating = new RegExp('^\-0+\.0+$')
+    if (string.search(minusWithZero) !== -1 || string.search(minusWithZeroFloating) !== -1) {
+        console.log('String contains minus with zero: that is not correct');
+        return false;
+    }
 
     // check if the string contains non-numeric symbols
     if (string.search(nonNumericSymbols) !== -1) {
@@ -18,11 +23,6 @@ function validateNumeric(string) {
         console.log('String contains invalid minus');
         return false;
     }
-
-    // if (string.search(minusWithZero) !== -1) {
-    //     console.log('String contains minus with zero: that is not correct');
-    //     return false;
-    // }
 
     if (string.search(dotInBegining) !== -1 ) {
         console.log('String contains dot in the begining: that is not correct');
